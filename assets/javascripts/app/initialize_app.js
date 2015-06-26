@@ -1,9 +1,9 @@
 require([
-  'widget_app'
-], function(WidgetApp) {
+  'app'
+], function(App) {
 
   var startApp = function() {
-    window.app = new WidgetApp();
+    window.app = new App();
   }
 
   // When running through Cordova, we should listen to the 'deviceready'

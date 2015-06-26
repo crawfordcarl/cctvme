@@ -1,5 +1,5 @@
 {
-  "name": "WidgetApp",
+  "name": "CCTV-Me",
   "dependencies": {
     "backbone": "~1.1.2",
     "requirejs": "~2.1.15",
@@ -11,6 +11,7 @@
     "sinon-chai": "~2.5.0",
     "mocha": "~1.18.2",
     "sinon": "~1.9.1",
-    "jquery-hammerjs": "~1.1.2"
+    "jquery-hammerjs": "~1.1.2",
+    "marionette": "~2.4.2"
   }
 }
