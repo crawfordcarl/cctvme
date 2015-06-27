@@ -6,24 +6,31 @@ define(function(require, exports, module) {
     template: 'map.html',
     onShow: function() {
 
+      var lat = this.getOption('latitude') ? this.getOption('latitude') : 51.525503;
+      var lng = this.getOption('longitude') ? this.getOption('longitude') : -0.0822229;
+      var accuracy = this.getOption('accuracy');
+
       L.mapbox.accessToken = app.config.mapbox_api_token;
-      var map = L.mapbox.map('map', app.config.mapbox_map_id)
+      this.map = L.mapbox.map('map', app.config.mapbox_map_id)
         .setView([
-          this.getOption('latitude'),
-          this.getOption('longitude')
+          lat,
+          lng
         ], 15);
 
-      var accuracyCircle = L.circle(
-        L.latLng(
-          this.getOption('latitude'),
-          this.getOption('longitude')
-        ),
-        this.getOption('accuracy'),
-        {
-          opacity: 1,
-          weight: 1,
-          fillOpacity: 0.4
-        }).addTo(map);
+      if(accuracy) {
+        var accuracyCircle = L.circle(
+          L.latLng(
+            lat,
+            lng
+          ),
+          this.getOption('accuracy'),
+          {
+            opacity: 1,
+            weight: 1,
+            fillOpacity: 0.4
+          }).addTo(this.map);
+      }
+
 
       var myIcon = L.icon({
         iconUrl: 'my-icon.png',
@@ -36,22 +43,22 @@ define(function(require, exports, module) {
         shadowSize: [68, 95],
         shadowAnchor: [22, 94]
       });
+      var that = this;
 
       function addMarker(camera) {
         var lat = camera.get('location').lat;
         var lng = camera.get('location').lng;
         //L.marker([lat, lng], {icon: myIcon}).addTo(map);
-        L.marker([lat, lng]).addTo(map);
+        L.marker([lat, lng]).addTo(that.map);
       }
 
       if(app.cameras.length > 0) {
         app.cameras.forEach(function(camera) {
-          console.log('addCamera');
           addMarker(camera);
         });
       }
 
-      app.cameras.listenTo('add', function(camera) {
+      this.listenTo(app.cameras, 'add', function(camera) {
         console.log('addCamera');
         addMarker(camera);
       });
@@ -59,12 +66,12 @@ define(function(require, exports, module) {
     },
     setLocation: function(location) {
       var that = this;
-      that.map.setView([location.lat, location.lng], 16);
+      that.map.setView([location.latitude, location.longitude], 16);
 
       var accuracyCircle = L.circle(
         L.latLng(
-          location.lat,
-          location.lng
+          location.latitude,
+          location.longitude
         ),
         location.accuracy,
         {
