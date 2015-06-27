@@ -59,6 +59,9 @@ define(function(require, exports, module) {
     showView: function(view){
       this.rootView.main.show(view);
     },
+    getView: function() {
+      return this.rootView.main.currentView;
+    },
     saveCameraImage: function(camera){
       var permanentStorage = window.localStorage;
       var tempStorage = window.sessionStorage;

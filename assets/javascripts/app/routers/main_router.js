@@ -27,12 +27,18 @@ define(function(require, exports, module) {
 
     index: function() {
 
+      app.showView(new MapView());
+
       function geoSuccess(position) {
-        app.showView(new MapView({
+        var data = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           accuracy: position.coords.accuracy
-        }));
+        };
+
+        app.getView().setLocation(data);
+        //app.showView(new MapView(data));
+
       }
 
       function geoError(error) {
