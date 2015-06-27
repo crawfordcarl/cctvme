@@ -14,6 +14,8 @@ define(function(require, exports, module) {
   var MainView     = require('views/root_view');
   var Evercam      = require('helpers/evercam');
   var JST          = require('templates');
+  var Photo        = require('models/photo');
+  var Photos       = require('collections/photos');
 
   //
   // setup marionette template cache to obtain from the templates required above
@@ -93,6 +95,32 @@ define(function(require, exports, module) {
     },
     getView: function() {
       return this.rootView.main.currentView;
+    },
+    getSelfie: function() {
+      function picSuccess(imageData) {
+        var photoCollection = new Photos();
+        var date = new Date();
+        photoCollection.add(new Photo({
+          data: "data:image/jpeg;base64," + imageData,
+          created:  Math.floor(date.getTime()/1000.0)
+        }));
+
+        alert(imageData.substring(0, 100));
+        app.savePhotos(photoCollection, date);
+      }
+
+      function picFail(message) {
+        alert('Failed because: ' + message);
+      }
+
+      if(Camera) {
+        alert('omg camera');
+      } else {
+        alert('no camera fuck you');
+      }
+      navigator.camera.getPicture(picSuccess, picFail, {
+        destinationType : Camera.DestinationType.DATA_URL
+      });
     },
     savePhotos: function(photos, date){
       date = date || new Date();
