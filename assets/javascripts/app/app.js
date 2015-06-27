@@ -12,6 +12,7 @@ define(function(require, exports, module) {
   var Router       = require('routers/main_router');
   var Cameras      = require('collections/cameras');
   var MainView     = require('views/root_view');
+  var Evercam      = require('helpers/evercam');
   var JST          = require('templates');
 
   //
@@ -41,11 +42,15 @@ define(function(require, exports, module) {
       // Create our views
       this.rootView = new MainView();
       this.rootView.render();
+
+      //create master cameras collection
+      this.cameras = new Cameras();
     },
     onStart: function(){
       var that = this;
       $.getJSON('config.json', function(config){
         that.config = config;
+        that.cameras.fetch();
 
         // Start backbone history
         Backbone.history.start();
@@ -53,6 +58,15 @@ define(function(require, exports, module) {
     },
     showView: function(view){
       this.rootView.main.show(view);
+    },
+    saveCameraImage: function(camera){
+      var permanentStorage = window.localStorage;
+      var tempStorage = window.sessionStorage;
+
+      var imageUrl = Evercam.liveCameraUrl(camera);
+      $.get(imageUrl, function(response){
+        console.log(response);
+      });
     }
   });
 

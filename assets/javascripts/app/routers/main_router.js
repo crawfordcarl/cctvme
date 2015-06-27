@@ -9,7 +9,8 @@ define(function(require, exports, module) {
   var MainRouter = Marionette.AppRouter.extend({
 
     routes: {
-      "": "index" // This is a default route.
+      "": "index", // This is a default route.
+      "cameras": "cameras"
     },
 
     initialize: function(options) {
@@ -17,11 +18,9 @@ define(function(require, exports, module) {
     },
 
     cameras: function() {
-      var cameras = new Cameras();
       app.showView(new CameraListView({
-        collection: cameras
+        collection: app.cameras
       }));
-      cameras.fetch();
     },
 
     index: function() {
