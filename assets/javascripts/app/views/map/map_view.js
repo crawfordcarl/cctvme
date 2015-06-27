@@ -6,7 +6,7 @@ define(function(require, exports, module) {
   var MapView = Marionette.ItemView.extend({
     template: 'map.html',
     onShow: function() {
-
+      this.listenTo(app.vent, 'geolocation', this.setLocation);
       var lat = this.getOption('latitude') ? this.getOption('latitude') : 51.525503;
       var lng = this.getOption('longitude') ? this.getOption('longitude') : -0.0822229;
       var accuracy = this.getOption('accuracy');

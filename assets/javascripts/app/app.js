@@ -39,8 +39,7 @@ define(function(require, exports, module) {
         app: this
       });
 
-      this.vent = Backbone.Radio.channel('global');
-
+      this.vent = Backbone.Wreqr.radio.channel('global').vent;
     },
     onStart: function(){
       var that = this;
@@ -56,6 +55,8 @@ define(function(require, exports, module) {
         that.config = config;
         that.cameras.fetch();
 
+        that.discoverLocation();
+
         // Start backbone history
         Backbone.history.start();
       });
@@ -70,7 +71,8 @@ define(function(require, exports, module) {
           accuracy: position.coords.accuracy
         };
 
-        that.trigger('geolocation', that.location);
+        that.vent.trigger('geolocation', that.location);
+        that.cameras.fetchNearCameras(that.location);
       }
 
       function geoError(error) {

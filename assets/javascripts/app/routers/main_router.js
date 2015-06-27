@@ -28,22 +28,6 @@ define(function(require, exports, module) {
     index: function() {
 
       app.showView(new MapView());
-
-      function geoSuccess(position) {
-        var data = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          accuracy: position.coords.accuracy
-        };
-
-        app.getView().setLocation(data);
-      }
-
-      function geoError(error) {
-        alert('Error in getting the geographic location');
-      }
-
-      navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
     },
 
     myPhotos: function(){
