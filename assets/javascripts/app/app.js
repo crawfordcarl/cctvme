@@ -47,6 +47,11 @@ define(function(require, exports, module) {
       });
     },
     onStart: function(){
+      var that = this;
+      $.getJSON('/config.json', function(config){
+        that.config = config;
+      });
+
       // Start backbone history
       Backbone.history.start();
     }

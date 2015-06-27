@@ -1,8 +1,8 @@
 {
-  "name": "WidgetApp",
+  "name": "CCTV-Me",
   "version": "1.0.0",
-  "description": "Dem widgets",
-  "author": "mike@mcarter.me",
+  "description": "Get CCTV cameras to work for you",
+  "author": "chrismcband@gmail.com, carlcrawford@live.co.uk",
   "license": "MIT",
   "readmeFilename": "readme.md",
   "dependencies": {

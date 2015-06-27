@@ -16,3 +16,4 @@ instrumentscli*
 .project
 .DS_Store
 .*.md.html
+*.iml

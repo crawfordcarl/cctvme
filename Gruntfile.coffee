@@ -41,7 +41,13 @@ config = (grunt) ->
         src: ['**/*.js']
         dest: 'www/js/'
       ]
-
+    css:
+      files: [
+        expand: true
+        cwd: 'assets/stylesheets/'
+        src: ['*.css']
+        dest: 'www/css/'
+      ]
   less:
     compile:
       options:
