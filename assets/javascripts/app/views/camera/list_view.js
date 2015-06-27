@@ -4,7 +4,7 @@ define(function(require, exports, module) {
   var CameraItemView = require('views/camera/item_view');
 
   var CameraItemView = Marionette.CollectionView.extend({
-    className: 'camera-tile-list row',
+    className: 'camera-tile-list',
     childView: CameraItemView
   });
 
