@@ -1,4 +1,5 @@
-<option value="">Select a date</option>
-{{#each timestamps}}
-    <option value="{{this}}">{{formatTimestamp this}}</option>
-{{/each}}
+<select>
+    {{#each timestamps}}
+        <option value="{{this}}" {{#ifEqual this ../timestamp}}selected="selected"{{/ifEqual}}>{{formatTimestamp this}}</option>
+    {{/each}}
+</select>

@@ -11,9 +11,7 @@ define(function(require) {
       photos: '.photos'
     },
     onShow: function(){
-      this.dateSelection.show(new DateSelectView({
-        collection: new Backbone.Collection(this.timestamps, {parse: true})
-      }));
+      this.dateSelection.show(new DateSelectView(this.options));
       this.photos.show(new PhotoListView({
         collection: this.collection
       }));
