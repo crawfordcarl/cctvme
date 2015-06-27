@@ -26,11 +26,12 @@ define(function(require, exports, module) {
     index: function() {
 
       function geoSuccess(position) {
-        app.showView(new MapView({
+        var data = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           accuracy: position.coords.accuracy
-        }));
+        };
+        app.showView(new MapView(data));
       }
 
       function geoError(error) {
