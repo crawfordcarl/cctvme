@@ -24,3 +24,22 @@ cordova plugins add org.apache.cordova.geolocation
 cordova plugins add org.apache.cordova.device-orientation
 cordova plugins ls
 '''
+
+## Config file
+
+API credentials are stored in a local config.json file, which needs to be located at
+
+```
+www/config.json
+```
+
+This should include the following:
+
+```json
+{
+  "evercam_api_id": "[api id]",
+  "evercam_api_secret": "[api secret]",
+  "mapbox_map_id": "[mapbox map id]",
+  "mapbox_api_token": "[mapbox api token]"
+}
+```
