@@ -63,9 +63,8 @@ define(function(require, exports, module) {
       var permanentStorage = window.localStorage;
       var tempStorage = window.sessionStorage;
 
-      var imageUrl = Evercam.liveCameraUrl(camera);
-      $.get(imageUrl, function(response){
-        console.log(response);
+      Evercam.getSnapshot(camera, function(imageData){
+        permanentStorage.setItem(camera.get('id'), imageData);
       });
     }
   });

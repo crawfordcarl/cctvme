@@ -6,8 +6,6 @@ define(function(require, exports, module) {
     template: 'map.html',
     onShow: function() {
 
-      app.cameras = new Backbone.Collection();
-
       L.mapbox.accessToken = app.config.mapbox_api_token;
       var map = L.mapbox.map('map', app.config.mapbox_map_id)
         .setView([
