@@ -9,13 +9,18 @@ define(function(require, exports, module) {
         app.config.evercam_api_id +
         '&api_key=' + app.config.evercam_api_secret;
       if (this.location) {
-        url += '&is_near_to='+this.location.latitude+','+this.location.longitude;
+        url += '&is_near_to=' + this.location.latitude + ',' +
+          this.location.longitude;
+      }
+      if (this.range) {
+        url += '&within_distance=' + this.range;
       }
       return url;
     },
-    fetchNearCameras: function(location){
+    fetchNearCameras: function(location, range){
       this.location = location;
-      this.fetch();
+      this.range = range;
+      return this.fetch();
     },
     parse: function(response){
       return response.cameras;

@@ -12,7 +12,7 @@ define(function(require, exports, module) {
     routes: {
       "": "index", // This is a default route.
       "cameras": "cameras",
-      "myphotos": "myPhotos"
+      "myphotos(/:timestamp)": "myPhotos"
     },
 
     initialize: function(options) {
@@ -33,15 +33,20 @@ define(function(require, exports, module) {
       app.showView(new MapView(options));
     },
 
-    myPhotos: function(){
+    myPhotos: function(timestamp){
       // go through localStorage keys and display images saved
       var photos = [];
-      for (var key in localStorage) {
-        if (localStorage.hasOwnProperty(key)) {
-          photos.push({
-            camera: key,
-            imageData: localStorage.getItem(key)
-          });
+      if (timestamp) {
+        if (localStorage.hasOwnProperty(timestamp)) {
+          photos = localStorage.getItem(timestamp);
+        } else {
+          app.command.execute('displayError', 'No photos found for this time');
+        }
+      } else {
+        for (var key in localStorage) {
+          if (localStorage.hasOwnProperty(key)) {
+            photos.push(JSON.parse(localStorage.getItem(key)));
+          }
         }
       }
 

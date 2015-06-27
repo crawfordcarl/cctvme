@@ -39,7 +39,14 @@ define(function(require, exports, module) {
         app: this
       });
 
-      this.vent = Backbone.Wreqr.radio.channel('global').vent;
+      this.channel = Backbone.Wreqr.radio.channel('global');
+      this.vent = this.channel.vent;
+      this.commands = this.channel.commands;
+      this.reqres = this.channel.reqres;
+
+      this.commands.setHandler('displayError', function(message){
+        alert(message);
+      });
     },
     onStart: function(){
       var that = this;
@@ -91,8 +98,8 @@ define(function(require, exports, module) {
       var permanentStorage = window.localStorage;
       var tempStorage = window.sessionStorage;
 
-      Evercam.getSnapshot(camera, function(imageData){
-        permanentStorage.setItem(camera.get('id'), imageData);
+      Evercam.getSnapshot(camera, function(photo){
+        permanentStorage.setItem(camera.get('id'), JSON.stringify(photo.toJSON()));
       });
     }
   });

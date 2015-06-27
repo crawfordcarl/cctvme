@@ -4,10 +4,7 @@ define(function(require, exports, module) {
 
   var PhotoItemView = Marionette.ItemView.extend({
     className: 'photo-tile',
-    template: 'photo.html',
-    onRender: function(){
-      console.log(this.serializeData());
-    }
+    template: 'photo.html'
   });
 
   return PhotoItemView;

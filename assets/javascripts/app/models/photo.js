@@ -3,8 +3,9 @@ define(function(require){
 
   var Photo = Backbone.Model.extend({
     /*
-     * camera - String the id of the camera the photo came from
-     * imageData - String base64 image data, can be directly passed to image src
+     * cameraId - String the id of the camera the photo came from
+     * cameraName - String the name of the camera
+     * data - String base64 image data, can be directly passed to image src
      */
   });
 
