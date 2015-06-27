@@ -6,6 +6,7 @@ require.config({
     'hammerjs'        : '../../../components/hammerjs/hammer',
     'jquery-hammerjs' : '../../../components/jquery-hammerjs/jquery.hammer-full',
     'backbone-hammer' : '../../../components/backbone.hammer/backbone.hammer',
+    'handlebars'      : '../../../components/handlebars/handlebars',
     'underscore'      : '../../../components/lodash/dist/lodash',
     'jquery'          : '../../../components/jquery/dist/jquery'
   },
@@ -13,6 +14,9 @@ require.config({
     backbone: {
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
+    },
+    handlebars: {
+      exports: 'Handlebars'
     }
   }
 });

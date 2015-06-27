@@ -1,8 +1,9 @@
 define(function(require, exports, module) {
 
   var Backbone = require('backbone');
+  var Marionette = require('marionette');
 
-  var MainRouter = Backbone.Router.extend({
+  var MainRouter = Marionette.AppRouter.extend({
 
     routes: {
       "": "index" // This is a default route.
@@ -13,7 +14,7 @@ define(function(require, exports, module) {
     },
 
     index: function() {
-      this.app.mainView.render();
+      this.app.rootView.render();
     }
 
   });

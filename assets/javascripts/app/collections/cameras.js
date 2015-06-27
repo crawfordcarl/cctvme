@@ -1,11 +1,11 @@
 define(function(require, exports, module) {
 
   var Backbone = require('backbone');
-  var Widget = require('models/widget');
+  var Camera = require('models/camera');
 
-  var Widgets = Backbone.Collection.extend({
-    model: Widget
+  var Cameras = Backbone.Collection.extend({
+    model: Camera
   });
 
-  return Widgets;
+  return Cameras;
 });

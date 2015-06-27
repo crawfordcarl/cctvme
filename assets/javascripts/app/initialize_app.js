@@ -4,6 +4,7 @@ require([
 
   var startApp = function() {
     window.app = new App();
+    app.start();
   }
 
   // When running through Cordova, we should listen to the 'deviceready'

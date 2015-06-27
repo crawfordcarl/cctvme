@@ -11,7 +11,18 @@ define(function(require, exports, module) {
   var Marionette   = require('marionette');
   var Router       = require('routers/main_router');
   var Cameras      = require('collections/cameras');
-  var MainView     = require('views/widget_view');
+  var MainView     = require('views/root_view');
+  var JST          = require('templates');
+
+  //
+  // setup marionette template cache to obtain from the templates required above
+  Marionette.TemplateCache.prototype.loadTemplate = function(templateId, options){
+    return JST[templateId];
+  };
+  //templates are already precomiled, just return them
+  Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate, options) {
+    return rawTemplate;
+  }
 
   // We'll use this file to boot up our application. It's extending Backbone.View, but
   // isn't really used as a view at all. You'll want to replace all Backbone code in
@@ -19,7 +30,7 @@ define(function(require, exports, module) {
   // components in the application work together and it not intended to be an example
   // of a well structured or well built application. A sensible application architecture
   // is up to you, as it's not something Backbone really prescribes.
-  var App = Backbone.View.extend({
+  var App = Marionette.Application.extend({
 
     initialize: function() {
       // Create our routers
@@ -31,10 +42,11 @@ define(function(require, exports, module) {
       var cameras = this.cameras = new Cameras();
 
       // Create our views
-      this.mainView = new MainView({
+      this.rootView = new MainView({
         collection: cameras
       });
-
+    },
+    onStart: function(){
       // Start backbone history
       Backbone.history.start();
     }

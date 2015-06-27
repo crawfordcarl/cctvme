@@ -55,7 +55,15 @@ config = (grunt) ->
         'www/css/main.css': ['www/css/main.css']
       options:
         keepSpecialComments: 0
-
+  handlebars:
+    compile:
+      options:
+        namespace: "JST"
+        amd: true,
+        processName: (filePath)->
+          filePath.substring(filePath.lastIndexOf('/') + 1)
+      files:
+        "www/js/app/templates.js": "assets/templates/*.html"
   requirejs:
     cordova:
       options:
@@ -82,6 +90,9 @@ config = (grunt) ->
     js:
       files: ['assets/javascripts/**/*']
       tasks: ['copy:js']
+    handlebars:
+      files: ['assets/templates/*.html']
+      tasks: ['handlebars']
     less:
       files: ['assets/stylesheets/**/*.less']
       tasks: ['less']
@@ -105,6 +116,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-contrib-cssmin')
   grunt.loadNpmTasks('grunt-contrib-connect')
+  grunt.loadNpmTasks('grunt-contrib-handlebars')
   grunt.loadNpmTasks('grunt-mocha-phantomjs')
   grunt.loadNpmTasks('grunt-html-build')
 
@@ -112,6 +124,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask('build', [
     'copy'
+    'handlebars'
     'requirejs'
     'less'
     'cssmin'
