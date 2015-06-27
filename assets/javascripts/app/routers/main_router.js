@@ -37,8 +37,6 @@ define(function(require, exports, module) {
         };
 
         app.getView().setLocation(data);
-        //app.showView(new MapView(data));
-
       }
 
       function geoError(error) {

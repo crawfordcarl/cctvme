@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
 
   var Marionette = require('marionette');
+  var EverCam = require('helpers/evercam');
 
   var MapView = Marionette.ItemView.extend({
     template: 'map.html',
@@ -49,7 +50,20 @@ define(function(require, exports, module) {
         var lat = camera.get('location').lat;
         var lng = camera.get('location').lng;
         //L.marker([lat, lng], {icon: myIcon}).addTo(map);
-        L.marker([lat, lng]).addTo(that.map);
+        var marker = L.marker([lat, lng]).addTo(that.map);
+
+        var popupContent = '<img src="' +
+          EverCam.liveCameraUrl(camera) +
+          '"/>' +
+          '<button id="' + camera.get('id') + '"><i class="fa fa-camera"></i></button>';
+
+        $('#map').on('click', '#' + camera.get('id'), function() {
+          app.saveCameraImage(camera);
+        });
+
+        marker.bindPopup(popupContent, {
+          minWidth: 300
+        });
       }
 
       if(app.cameras.length > 0) {
@@ -59,7 +73,6 @@ define(function(require, exports, module) {
       }
 
       this.listenTo(app.cameras, 'add', function(camera) {
-        console.log('addCamera');
         addMarker(camera);
       });
 
