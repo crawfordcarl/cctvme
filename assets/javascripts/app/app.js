@@ -4,6 +4,7 @@ define(function(require, exports, module) {
   require('hammerjs');
   require('jquery-hammerjs');
   require('backbone-hammer');
+  require('handlebars_helpers');
 
   var _            = require('underscore');
   var $            = require('jquery');
