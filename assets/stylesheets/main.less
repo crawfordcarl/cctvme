@@ -1,6 +1,7 @@
 @background-color: #263680;
 @brand-primary: #ECD047;
 @brand-secondary: #7788DA;
+@brand-success: #8DDB80;
 @gray-base: #000;
 @gray: lighten(@gray-base, 33.5%);
 @gray-light: #7788DA;
@@ -80,5 +81,9 @@ img {
     font-size: 30px;
     text-shadow: 1px 0px 1px @gray-darker;
     padding: 5px 10px;
+
+    &.active {
+      color: @brand-primary;
+    }
   }
 }

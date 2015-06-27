@@ -14,8 +14,11 @@ define(function(require, exports, module) {
       "touch button.removeWidget": "removeWidget",
       "touch button.addWidget": "addWidget"
     },
+    initialize: function(options){
+      this.app = options.app;
+    },
     onRender: function(){
-      this.footerButtons.show(new NavButtonsView());
+      this.footerButtons.show(new NavButtonsView({router: app.router}));
     }
   });
 

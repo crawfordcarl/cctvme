@@ -39,15 +39,17 @@ define(function(require, exports, module) {
         app: this
       });
 
+    },
+    onStart: function(){
+      var that = this;
+
       // Create our views
       this.rootView = new MainView();
       this.rootView.render();
 
       //create master cameras collection
       this.cameras = new Cameras();
-    },
-    onStart: function(){
-      var that = this;
+
       $.getJSON('config.json', function(config){
         that.config = config;
         that.cameras.fetch();
