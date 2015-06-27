@@ -1,4 +1,4 @@
-define(function(require, exports, module) {
+define(function(require) {
 
   var Marionette = require('marionette');
   var PhotoItemView = require('views/photo/photo_item_view');

@@ -95,6 +95,7 @@ define(function(require, exports, module) {
       return this.rootView.main.currentView;
     },
     savePhotos: function(photos, date){
+      date = date || new Date();
       var timestamp = Math.floor(date.getTime() / 1000) + '';
       localStorage.setItem(timestamp, JSON.stringify(photos.toJSON()));
     }

@@ -3,7 +3,7 @@ define(function(require, exports, module) {
   var Backbone = require('backbone');
   var Marionette = require('marionette');
   var CameraListView = require('views/camera/list_view');
-  var PhotoListView = require('views/photo/photo_list_view');
+  var PhotoPageView = require('views/photo/photo_page_view');
   var Photos = require('collections/photos');
   var MapView = require('views/map/map_view');
 
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
         }
       }
 
-      this.app.showView(new PhotoListView({
+      this.app.showView(new PhotoPageView({
         timestamp: timestamp,
         timestamps: timestamps,
         collection: new Photos(photos, {parse: true})

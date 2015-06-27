@@ -2,6 +2,7 @@ define(function(require, exports, module) {
 
   var Marionette = require('marionette');
   var EverCam = require('helpers/evercam');
+  var Photos = require('collections/photos');
 
   var MapView = Marionette.ItemView.extend({
     template: 'map.html',
@@ -58,7 +59,9 @@ define(function(require, exports, module) {
           '<button id="' + camera.get('id') + '"><i class="fa fa-camera"></i></button>';
 
         $('#map').on('click', '#' + camera.get('id'), function() {
-          app.saveCameraImage(camera);
+          EverCam.getSnapshot(camera, function(photo){
+            app.savePhotos(new Photos([photo]));
+          });
         });
 
         marker.bindPopup(popupContent, {
