@@ -48,6 +48,13 @@ config = (grunt) ->
         src: ['*.css']
         dest: 'www/css/'
       ]
+    fonts:
+      files: [
+        expand: true
+        cwd: 'assets/fonts/'
+        src: ['*.otf', '*.eot', '*.svg', '*.ttf', '*.woff', '*.woff2']
+        dest: 'www/fonts/'
+      ]
   less:
     compile:
       options:
