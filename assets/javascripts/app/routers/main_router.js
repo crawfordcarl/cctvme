@@ -36,21 +36,29 @@ define(function(require, exports, module) {
     myPhotos: function(timestamp){
       // go through localStorage keys and display images saved
       var photos = [];
+      var timestamps = [];
+      for (var key in localStorage) {
+        if (localStorage.hasOwnProperty(key)) {
+          timestamps.push(key);
+        }
+      }
+      timestamps.sort();
+      if (!timestamp) {
+        timestamp = timestamps[0];
+      }
       if (timestamp) {
         if (localStorage.hasOwnProperty(timestamp)) {
-          photos = localStorage.getItem(timestamp);
+          photos = JSON.parse(localStorage.getItem(timestamp),
+            {parse: true});
         } else {
           app.command.execute('displayError', 'No photos found for this time');
-        }
-      } else {
-        for (var key in localStorage) {
-          if (localStorage.hasOwnProperty(key)) {
-            photos.push(JSON.parse(localStorage.getItem(key)));
-          }
+          return;
         }
       }
 
       this.app.showView(new PhotoListView({
+        timestamp: timestamp,
+        timestamps: timestamps,
         collection: new Photos(photos, {parse: true})
       }));
     }

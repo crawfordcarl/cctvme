@@ -94,13 +94,9 @@ define(function(require, exports, module) {
     getView: function() {
       return this.rootView.main.currentView;
     },
-    saveCameraImage: function(camera){
-      var permanentStorage = window.localStorage;
-      var tempStorage = window.sessionStorage;
-
-      Evercam.getSnapshot(camera, function(photo){
-        permanentStorage.setItem(camera.get('id'), JSON.stringify(photo.toJSON()));
-      });
+    savePhotos: function(photos, date){
+      var timestamp = date.toLocaleString();
+      localStorage.setItem(timestamp, JSON.stringify(photos.toJSON()));
     }
   });
 
