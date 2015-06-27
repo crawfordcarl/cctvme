@@ -2,6 +2,8 @@ define(function(require, exports, module) {
 
   var Backbone = require('backbone');
   var Marionette = require('marionette');
+  var CameraListView = require('views/camera/list_view');
+  var Cameras = require('collections/cameras');
 
   var MainRouter = Marionette.AppRouter.extend({
 
@@ -14,7 +16,11 @@ define(function(require, exports, module) {
     },
 
     index: function() {
-      this.app.rootView.render();
+      var cameras = new Cameras();
+      app.showView(new CameraListView({
+        collection: cameras
+      }));
+      cameras.fetch();
     }
 
   });

@@ -38,24 +38,22 @@ define(function(require, exports, module) {
         app: this
       });
 
-      // Create our collections
-      var cameras = this.cameras = new Cameras();
-
       // Create our views
-      this.rootView = new MainView({
-        collection: cameras
-      });
+      this.rootView = new MainView();
+      this.rootView.render();
     },
     onStart: function(){
       var that = this;
-      $.getJSON('/config.json', function(config){
+      $.getJSON('config.json', function(config){
         that.config = config;
+
+        // Start backbone history
+        Backbone.history.start();
       });
-
-      // Start backbone history
-      Backbone.history.start();
+    },
+    showView: function(view){
+      this.rootView.main.show(view);
     }
-
   });
 
   return App;
