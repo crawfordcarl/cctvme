@@ -26,8 +26,11 @@ define(function(require, exports, module) {
     },
 
     index: function() {
-
-      app.showView(new MapView());
+      var options = {};
+      if (app.location) {
+        options = app.location;
+      }
+      app.showView(new MapView(options));
     },
 
     myPhotos: function(){
