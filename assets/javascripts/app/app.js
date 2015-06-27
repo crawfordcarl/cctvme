@@ -39,6 +39,8 @@ define(function(require, exports, module) {
         app: this
       });
 
+      this.vent = Backbone.Radio.channel('global');
+
     },
     onStart: function(){
       var that = this;
@@ -57,6 +59,25 @@ define(function(require, exports, module) {
         // Start backbone history
         Backbone.history.start();
       });
+    },
+    discoverLocation: function() {
+      var that = this;
+
+      function geoSuccess(position) {
+        that.location = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          accuracy: position.coords.accuracy
+        };
+
+        that.trigger('geolocation', that.location);
+      }
+
+      function geoError(error) {
+        alert('Error in getting the geographic location');
+      }
+
+      navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
     },
     showView: function(view){
       this.rootView.main.show(view);
