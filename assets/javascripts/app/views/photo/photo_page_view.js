@@ -10,6 +10,11 @@ define(function(require) {
       dateSelection: '.photo-dates',
       photos: '.photos'
     },
+    serializeData: function(){
+      return {
+        timestamp: this.getOption('timestamp')
+      };
+    },
     onShow: function(){
       this.dateSelection.show(new DateSelectView(this.options));
       this.photos.show(new PhotoListView({

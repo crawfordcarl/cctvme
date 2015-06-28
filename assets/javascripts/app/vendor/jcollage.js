@@ -30,10 +30,12 @@ function Collage($canvas) {
   var layers = new Array();
 
   //canvas.addEventListener('mousemove', mouseMoveEvent, false);
+  //canvas.addEventListener('touchmove', touchMoveEvent, false);
   //canvas.addEventListener('mouseout', mouseOutEvent, false);
   //canvas.addEventListener('mouseup', mouseOutEvent, false);
   //canvas.addEventListener('mouseleave', mouseOutEvent, false);
   //canvas.addEventListener('mousedown', mouseDownEvent, false);
+  //canvas.addEventListener('touchstart', touchStartEvent, false);
 
   this.addLayer = function(img) {
     var layer = new Layer(img);
@@ -170,7 +172,37 @@ function Collage($canvas) {
     mouseDown = true;
   }
 
+  function touchStartEvent(e){
+    mouseDown = true;
+    var intersected = false;
+    for (var i = layers.length; i--; i >= 0) {
+      if (layers[i].intersect(e.touches[0].pageX - canvasOffsetX, e.touches[0].pageY - canvasOffsetY) && layers[i].isVisible()) {
+        intersected = true;
+        selectedLayer = layers[i];
+
+        layerState = MOVING;
+
+        drawMarker(layers[i]);
+
+        break;
+      }
+    }
+  }
+
+  function touchMoveEvent(e){
+    if (layerState == MOVING && mouseDown) {
+      selectedLayer.offsetX += e.touches[0].pageX - canvasOffsetX - mousePrevX;
+      selectedLayer.offsetY += e.touches[0].pageY - canvasOffsetY - mousePrevY;
+
+      drawMarker(selectedLayer);
+
+      mousePrevX = e.touches[0].pageX - canvasOffsetX;
+      mousePrevY = e.touches[0].pageY - canvasOffsetY;
+    }
+  }
+
   function mouseMoveEvent(e) {
+    layerState = MOVING;
     if (layerState == SCALING && mouseDown) {
       var square = selectedLayer.getSquare();
       var scaleToWidth = Math.sqrt(Math.pow(square.d.x - (e.pageX - canvasOffsetX), 2) + Math.pow(square.d.y - (e.pageY - canvasOffsetY), 2));

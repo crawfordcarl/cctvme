@@ -6,7 +6,15 @@ define(function(require) {
   var PhotoCollageView = Marionette.ItemView.extend({
     template: 'photo_collage.html',
     ui: {
-      canvas: '.photo-canvas'
+      canvas: '.photo-canvas',
+      collageImg: 'img.collage',
+      randomizeBtn: '.randomize'
+    },
+    events: {
+      'click .randomize': function(){
+        app.router.photoCollage(this.getOption('timestamp'));
+        return false;
+      }
     },
     serializeData: function(){
       return {
@@ -51,6 +59,10 @@ define(function(require) {
           }
           layer.setAngle(angle);
           jCollage.redraw();
+
+          //if (index === photos.length - 1) {
+          //  that.ui.collageImg[0].src = canvas.toDataURL();
+          //}
         };
         image.src = photo.get('data');
       });
