@@ -14,10 +14,7 @@ define(function(require, exports, module) {
 
       L.mapbox.accessToken = app.config.mapbox_api_token;
       this.map = L.mapbox.map('map', app.config.mapbox_map_id)
-        .setView([
-          lat,
-          lng
-        ], 15);
+        .setView([lat,lng], 15);
 
       if(accuracy) {
         var accuracyCircle = L.circle(
@@ -25,17 +22,17 @@ define(function(require, exports, module) {
             lat,
             lng
           ),
-          this.getOption('accuracy'),
+          300,
           {
             opacity: 1,
             weight: 1,
-            fillOpacity: 0.4
+            fillOpacity: 0.2
           }).addTo(this.map);
       }
 
       var myIcon = L.icon({
-        iconUrl: '/img/camera-icon.jpg',
-        iconRetinaUrl: '/img/camera-icon.jpg',
+        iconUrl: 'img/camera-icon.jpg',
+        iconRetinaUrl: 'img/camera-icon.jpg',
         iconSize: [30, 30],
         popupAnchor: [-3, -76]
       });
@@ -75,7 +72,7 @@ define(function(require, exports, module) {
     },
     setLocation: function(location) {
       var that = this;
-      that.map.setView([location.latitude, location.longitude], 16);
+      that.map.setView([location.latitude, location.longitude], 18);
 
       var accuracyCircle = L.circle(
         L.latLng(
@@ -86,7 +83,7 @@ define(function(require, exports, module) {
         {
           opacity: 1,
           weight: 1,
-          fillOpacity: 0.4
+          fillOpacity: 0.2
         }).addTo(that.map);
     }
   });

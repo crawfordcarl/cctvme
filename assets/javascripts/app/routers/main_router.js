@@ -6,13 +6,15 @@ define(function(require, exports, module) {
   var PhotoPageView = require('views/photo/photo_page_view');
   var Photos = require('collections/photos');
   var MapView = require('views/map/map_view');
+  var LoadingView = require('views/loading');
 
   var MainRouter = Marionette.AppRouter.extend({
 
     routes: {
       "": "index", // This is a default route.
       "cameras": "cameras",
-      "myphotos(/:timestamp)": "myPhotos"
+      "myphotos(/:timestamp)": "myPhotos",
+      "loading": "loading"
     },
 
     initialize: function(options) {
@@ -31,6 +33,10 @@ define(function(require, exports, module) {
         options = app.location;
       }
       app.showView(new MapView(options));
+    },
+
+    loading: function() {
+      this.app.showView(new LoadingView());
     },
 
     myPhotos: function(timestamp){
