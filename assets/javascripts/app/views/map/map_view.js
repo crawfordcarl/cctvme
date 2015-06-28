@@ -33,25 +33,18 @@ define(function(require, exports, module) {
           }).addTo(this.map);
       }
 
-
       var myIcon = L.icon({
-        iconUrl: 'my-icon.png',
-        iconRetinaUrl: 'my-icon@2x.png',
-        iconSize: [38, 95],
-        iconAnchor: [22, 94],
-        popupAnchor: [-3, -76],
-        shadowUrl: 'my-icon-shadow.png',
-        shadowRetinaUrl: 'my-icon-shadow@2x.png',
-        shadowSize: [68, 95],
-        shadowAnchor: [22, 94]
+        iconUrl: '/img/camera-icon.jpg',
+        iconRetinaUrl: '/img/camera-icon.jpg',
+        iconSize: [30, 30],
+        popupAnchor: [-3, -76]
       });
       var that = this;
 
       function addMarker(camera) {
         var lat = camera.get('location').lat;
         var lng = camera.get('location').lng;
-        //L.marker([lat, lng], {icon: myIcon}).addTo(map);
-        var marker = L.marker([lat, lng]).addTo(that.map);
+        var marker = L.marker([lat, lng], {icon: myIcon}).addTo(that.map);
 
         var popupContent = '<img src="' +
           EverCam.liveCameraUrl(camera) +
