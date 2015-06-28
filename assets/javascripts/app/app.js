@@ -106,7 +106,7 @@ define(function(require, exports, module) {
           data: "data:image/jpeg;base64," + imageData,
           created:  Math.floor(date.getTime()/1000.0)
         }));
-        Evercam.getNearbySnapshots(that.location, 300, function(photos){
+        Evercam.getNearbySnapshots(that.location, 500, function(photos){
           photoCollection.add(photos);
           that.savePhotos(photoCollection, date);
         });
@@ -121,7 +121,7 @@ define(function(require, exports, module) {
         });
       } else {
         var photoCollection = new Photos();
-        Evercam.getNearbySnapshots(that.location, 300, function(photos){
+        Evercam.getNearbySnapshots(that.location, 500, function(photos){
           photoCollection.add(photos);
           that.savePhotos(photoCollection, date);
         });
