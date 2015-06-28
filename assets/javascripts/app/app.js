@@ -101,6 +101,7 @@ define(function(require, exports, module) {
       var that = this;
       var date = new Date();
       function picSuccess(imageData) {
+        app.router.navigate('loading', {trigger: true});
         var photoCollection = new Photos();
         photoCollection.add(new Photo({
           data: "data:image/jpeg;base64," + imageData,
@@ -109,6 +110,8 @@ define(function(require, exports, module) {
         Evercam.getNearbySnapshots(that.location, 500, function(photos){
           photoCollection.add(photos);
           that.savePhotos(photoCollection, date);
+          app.router.navigate('myphotos/' + Math.floor(date.getTime()/1000.0),
+            {trigger: true});
         });
       }
 
@@ -124,6 +127,8 @@ define(function(require, exports, module) {
         Evercam.getNearbySnapshots(that.location, 500, function(photos){
           photoCollection.add(photos);
           that.savePhotos(photoCollection, date);
+          app.router.navigate('myphotos/' + Math.floor(date.getTime()/1000.0),
+            {trigger: true});
         });
       }
     },

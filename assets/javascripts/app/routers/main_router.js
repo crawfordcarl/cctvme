@@ -7,6 +7,7 @@ define(function(require, exports, module) {
   var PhotoCollageView = require('views/photo/photo_collage_view');
   var Photos = require('collections/photos');
   var MapView = require('views/map/map_view');
+  var LoadingView = require('views/loading');
 
   var MainRouter = Marionette.AppRouter.extend({
 
@@ -14,7 +15,8 @@ define(function(require, exports, module) {
       "": "index", // This is a default route.
       "cameras": "cameras",
       "myphotos(/:timestamp)": "myPhotos",
-      "photocollage/:timestamp": "photoCollage"
+      "photocollage/:timestamp": "photoCollage",
+      "loading": "loading"
     },
 
     initialize: function(options) {
@@ -33,6 +35,10 @@ define(function(require, exports, module) {
         options = app.location;
       }
       app.showView(new MapView(options));
+    },
+
+    loading: function() {
+      this.app.showView(new LoadingView());
     },
 
     myPhotos: function(timestamp){
