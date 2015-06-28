@@ -99,14 +99,14 @@ define(function(require, exports, module) {
     },
     getSelfie: function() {
       var that = this;
+      var date = new Date();
       function picSuccess(imageData) {
         var photoCollection = new Photos();
-        var date = new Date();
         photoCollection.add(new Photo({
           data: "data:image/jpeg;base64," + imageData,
           created:  Math.floor(date.getTime()/1000.0)
         }));
-        Evercam.getNearbySnapshots(that.location, 150, function(photos){
+        Evercam.getNearbySnapshots(that.location, 300, function(photos){
           photoCollection.add(photos);
           that.savePhotos(photoCollection, date);
         });
@@ -115,9 +115,17 @@ define(function(require, exports, module) {
       function picFail(message) {
         alert('Failed because: ' + message);
       }
-      navigator.camera.getPicture(picSuccess, picFail, {
-        destinationType : Camera.DestinationType.DATA_URL
-      });
+      if (navigator.camera) {
+        navigator.camera.getPicture(picSuccess, picFail, {
+          destinationType : Camera.DestinationType.DATA_URL
+        });
+      } else {
+        var photoCollection = new Photos();
+        Evercam.getNearbySnapshots(that.location, 300, function(photos){
+          photoCollection.add(photos);
+          that.savePhotos(photoCollection, date);
+        });
+      }
     },
     savePhotos: function(photos, date){
       date = date || new Date();
