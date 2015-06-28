@@ -31,10 +31,9 @@ define(function(require, exports, module) {
       }
 
       var myIcon = L.icon({
-        iconUrl: '/img/camera-icon.png',
-        iconRetinaUrl: '/img/camera-icon.png',
-        iconSize: [30, 30],
-        popupAnchor: [-3, -76]
+        iconUrl: 'img/camera-icon.png',
+        iconRetinaUrl: 'img/camera-icon.png',
+        iconSize: [30, 30]
       });
       var that = this;
 
