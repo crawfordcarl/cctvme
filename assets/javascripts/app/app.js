@@ -98,6 +98,7 @@ define(function(require, exports, module) {
       return this.rootView.main.currentView;
     },
     getSelfie: function() {
+      var that = this;
       function picSuccess(imageData) {
         var photoCollection = new Photos();
         var date = new Date();
@@ -105,19 +106,14 @@ define(function(require, exports, module) {
           data: "data:image/jpeg;base64," + imageData,
           created:  Math.floor(date.getTime()/1000.0)
         }));
-
-        alert(imageData.substring(0, 100));
-        app.savePhotos(photoCollection, date);
+        Evercam.getNearbySnapshots(that.location, 150, function(photos){
+          photoCollection.add(photos);
+          that.savePhotos(photoCollection, date);
+        });
       }
 
       function picFail(message) {
         alert('Failed because: ' + message);
-      }
-
-      if(Camera) {
-        alert('omg camera');
-      } else {
-        alert('no camera fuck you');
       }
       navigator.camera.getPicture(picSuccess, picFail, {
         destinationType : Camera.DestinationType.DATA_URL

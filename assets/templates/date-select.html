@@ -1,5 +1,9 @@
-<select>
-    {{#each timestamps}}
-        <option value="{{this}}" {{#ifEqual this ../timestamp}}selected="selected"{{/ifEqual}}>{{formatTimestamp this}}</option>
-    {{/each}}
-</select>
+{{#if timestamps.length}}
+    <select>
+        {{#each timestamps}}
+            <option value="{{this}}" {{#ifEqual this ../timestamp}}selected="selected"{{/ifEqual}}>{{formatTimestamp this}}</option>
+        {{/each}}
+    </select>
+{{else}}
+    You haven't taken any photos yet.
+{{/if}}
